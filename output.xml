@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.7.0 on win32)" generated="20200125 17:58:06.122" rpa="false">
+<suite id="s1" name="TC1 GET Request" source="C:\Users\Janielle Gregorio\PycharmProjects\API_Automation\TestCases\TC1_GET_Request.robot">
+<test id="s1-t1" name="Get_WeatherInfo">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>MySession</arg>
+<arg>${base_url}</arg>
+</arguments>
+<msg timestamp="20200125 17:58:07.214" level="INFO">Creating Session using : alias=MySession, url=http://restapi.demoqa.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200125 17:58:07.214" endtime="20200125 17:58:07.215"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>MySession</arg>
+<arg>/utilities/weather/city/${city}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20200125 17:58:07.216" level="INFO">GET Request using : uri=/utilities/weather/city/Delhi, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200125 17:58:08.857" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200125 17:58:07.216" endtime="20200125 17:58:08.857"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${status_code}</var>
+</assign>
+<msg timestamp="20200125 17:58:08.858" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20200125 17:58:08.857" endtime="20200125 17:58:08.858"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status_code}</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" starttime="20200125 17:58:08.859" endtime="20200125 17:58:08.860"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<assign>
+<var>${body}</var>
+</assign>
+<msg timestamp="20200125 17:58:08.861" level="INFO">${body} = {
+    "City": "Delhi",
+    "Temperature": "18.5 Degree celsius",
+    "Humidity": "37 Percent",
+    "WeatherDescription": "haze",
+    "WindSpeed": "3.1 Km per hour",
+    "WindDirectionDegree": "280 Deg...</msg>
+<status status="PASS" starttime="20200125 17:58:08.860" endtime="20200125 17:58:08.861"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${body}</arg>
+<arg>Delhi</arg>
+</arguments>
+<status status="PASS" starttime="20200125 17:58:08.862" endtime="20200125 17:58:08.862"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${response.headers}</arg>
+<arg>Content-Type</arg>
+</arguments>
+<assign>
+<var>${ContentTypeValue}</var>
+</assign>
+<msg timestamp="20200125 17:58:08.863" level="INFO">${ContentTypeValue} = application/json</msg>
+<status status="PASS" starttime="20200125 17:58:08.863" endtime="20200125 17:58:08.863"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${ContentTypeValue}</arg>
+<arg>application/json</arg>
+</arguments>
+<status status="PASS" starttime="20200125 17:58:08.864" endtime="20200125 17:58:08.865"></status>
+</kw>
+<status status="PASS" starttime="20200125 17:58:07.212" endtime="20200125 17:58:08.865" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20200125 17:58:06.140" endtime="20200125 17:58:08.964"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="TC1 GET Request">TC1 GET Request</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
