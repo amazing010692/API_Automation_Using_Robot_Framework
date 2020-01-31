@@ -1,32 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.1.2 (Python 3.7.0 on win32)" generated="20200125 17:58:06.122" rpa="false">
-<suite id="s1" name="TC1 GET Request" source="C:\Users\Janielle Gregorio\PycharmProjects\API_Automation\TestCases\TC1_GET_Request.robot">
-<test id="s1-t1" name="Get_WeatherInfo">
+<robot generator="Robot 3.1.2 (Python 3.7.0 on win32)" generated="20200131 13:20:53.594" rpa="false">
+<suite id="s1" name="TC2 AKIN" source="C:\Users\Janielle Gregorio\PycharmProjects\API_Automation\TestCases\TC2_AKIN.robot">
+<test id="s1-t1" name="Get Entities With Valid Token In Headers">
 <kw name="Create Session" library="RequestsLibrary">
 <doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
 <arg>MySession</arg>
 <arg>${base_url}</arg>
 </arguments>
-<msg timestamp="20200125 17:58:07.214" level="INFO">Creating Session using : alias=MySession, url=http://restapi.demoqa.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20200125 17:58:07.214" endtime="20200125 17:58:07.215"></status>
+<msg timestamp="20200131 13:20:53.985" level="INFO">Creating Session using : alias=MySession, url=https://identity-api.ubx.ph/entity-api-cpu/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200131 13:20:53.985" endtime="20200131 13:20:53.985"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Authorization=${valid_token}</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20200131 13:20:53.985" level="INFO">${headers} = {'Authorization': 'eyJraWQiOiI2UHlBQkZGU1ZhZkoxVmVCXC9qazhcL09VOTNBcjRtaFhQZHhGOFwvUVMxWHBZPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI1Mzk0N2FmYi1lNWUzLTQ0NjEtODFkYy00YzM2Njg5YjVhNWYiLCJldmVudF9pZCI6ImEwMGVlO...</msg>
+<status status="PASS" starttime="20200131 13:20:53.985" endtime="20200131 13:20:53.985"></status>
 </kw>
 <kw name="Get Request" library="RequestsLibrary">
 <doc>Send a GET request on the session object found using the
 given `alias`</doc>
 <arguments>
 <arg>MySession</arg>
-<arg>/utilities/weather/city/${city}</arg>
+<arg>${route}</arg>
+<arg>headers=${headers}</arg>
 </arguments>
 <assign>
 <var>${response}</var>
 </assign>
-<msg timestamp="20200125 17:58:07.216" level="INFO">GET Request using : uri=/utilities/weather/city/Delhi, params=None, allow_redirects=True, timeout=None
-headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+<msg timestamp="20200131 13:20:53.985" level="INFO">GET Request using : uri=/entities, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'eyJraWQiOiI2UHlBQkZGU1ZhZkoxVmVCXC9qazhcL09VOTNBcjRtaFhQZHhGOFwvUVMxWHBZPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI1Mzk0N2FmYi1lNWUzLTQ0NjEtODFkYy00YzM2Njg5YjVhNWYiLCJldmVudF9pZCI6ImEwMGVlODU3LTYwNzYtNDZjMi04YWRjLWFhNGFjMDQ3NDAyMyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE1ODA0NDc4MDMsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV9tNEp4VlJOZ1oiLCJleHAiOjE1ODA0NTE0MDUsImlhdCI6MTU4MDQ0NzgwNSwianRpIjoiZjBiZGNkNDQtOGMxMC00ZDg4LWJiNDUtMGFlYjMwMTg4ODY5IiwiY2xpZW50X2lkIjoiNTZmdGQwMms1N2pic2piZXVoczY2ZnM2M2wiLCJ1c2VybmFtZSI6ImphaXJ1c0B1YngucGgifQ.l9f_cBC3YfeSIAZcb8x2slZG21wBmzBq8G5RU-7-irCmxDmOit96GUYBDAM-OBaDEdgdw1_1lrXNQJhzXFZ3cahuXGkdPW8R3lisi47sONOOWzq_A1fP7O6CZScRrs3oHNO5HV3QbVC9lAkvKav4utuKaiQ_cQBpFs6ced8vf_o5GiThgB3e8vS-lmiRgP2ggHpR0UNh5IqLjn5WY6OEBaAIS3yeP_1JJUEUDk7qoZegMu1emGJHEX_3iAdPROx2sHvhettaaxnbMzNwMLZI1Ozd_k6soumApm9-2KzLQ-_vGla7axxBVGFr81ZGkxayI8SCe1sq18P5YN5mkdS9hQ'} 
 data=None 
 json=None</msg>
-<msg timestamp="20200125 17:58:08.857" level="INFO">${response} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20200125 17:58:07.216" endtime="20200125 17:58:08.857"></status>
+<msg timestamp="20200131 13:20:54.945" level="INFO">c:\users\janielle gregorio\pycharmprojects\api_automation\venv\lib\site-packages\urllib3\connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'identity-api.ubx.ph'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200131 13:20:54.945" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200131 13:20:53.985" endtime="20200131 13:20:54.945"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<msg timestamp="20200131 13:20:54.960" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200131 13:20:54.960" endtime="20200131 13:20:54.960"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<status status="PASS" starttime="20200131 13:20:54.960" endtime="20200131 13:20:54.960"></status>
 </kw>
 <kw name="Convert To String" library="BuiltIn">
 <doc>Converts the given item to a Unicode string.</doc>
@@ -36,8 +65,19 @@ json=None</msg>
 <assign>
 <var>${status_code}</var>
 </assign>
-<msg timestamp="20200125 17:58:08.858" level="INFO">${status_code} = 200</msg>
-<status status="PASS" starttime="20200125 17:58:08.857" endtime="20200125 17:58:08.858"></status>
+<msg timestamp="20200131 13:20:54.960" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20200131 13:20:54.960" endtime="20200131 13:20:54.960"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.json()}</arg>
+</arguments>
+<assign>
+<var>${body}</var>
+</assign>
+<msg timestamp="20200131 13:20:55.148" level="INFO">${body} = {'timestamp': '2020-01-31T05:20:54.731Z', 'status': 200, 'message': 'Successfully retrieved entity list', 'entityList': [{'id': 'dbf21e0f-cfc6-4a29-9f4f-689940a06783', 'name': 'CPU', 'identityAddress'...</msg>
+<status status="PASS" starttime="20200131 13:20:54.960" endtime="20200131 13:20:55.148"></status>
 </kw>
 <kw name="Should Be Equal" library="BuiltIn">
 <doc>Fails if the given objects are unequal.</doc>
@@ -45,66 +85,306 @@ json=None</msg>
 <arg>${status_code}</arg>
 <arg>200</arg>
 </arguments>
-<status status="PASS" starttime="20200125 17:58:08.859" endtime="20200125 17:58:08.860"></status>
-</kw>
-<kw name="Convert To String" library="BuiltIn">
-<doc>Converts the given item to a Unicode string.</doc>
-<arguments>
-<arg>${response.content}</arg>
-</arguments>
-<assign>
-<var>${body}</var>
-</assign>
-<msg timestamp="20200125 17:58:08.861" level="INFO">${body} = {
-    "City": "Delhi",
-    "Temperature": "18.5 Degree celsius",
-    "Humidity": "37 Percent",
-    "WeatherDescription": "haze",
-    "WindSpeed": "3.1 Km per hour",
-    "WindDirectionDegree": "280 Deg...</msg>
-<status status="PASS" starttime="20200125 17:58:08.860" endtime="20200125 17:58:08.861"></status>
+<status status="PASS" starttime="20200131 13:20:55.148" endtime="20200131 13:20:55.148"></status>
 </kw>
 <kw name="Should Contain" library="BuiltIn">
 <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
 <arguments>
 <arg>${body}</arg>
-<arg>Delhi</arg>
+<arg>Successfully retrieved entity list</arg>
 </arguments>
-<status status="PASS" starttime="20200125 17:58:08.862" endtime="20200125 17:58:08.862"></status>
+<status status="PASS" starttime="20200131 13:20:55.148" endtime="20200131 13:20:55.148"></status>
 </kw>
-<kw name="Get From Dictionary" library="Collections">
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" starttime="20200131 13:20:53.985" endtime="20200131 13:20:55.148" critical="yes"></status>
+</test>
+<test id="s1-t2" name="Get Entities And Check Entity Name and Status">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
-<arg>${response.headers}</arg>
-<arg>Content-Type</arg>
+<arg>MySession</arg>
+<arg>${base_url}</arg>
+</arguments>
+<msg timestamp="20200131 13:20:55.148" level="INFO">Creating Session using : alias=MySession, url=https://identity-api.ubx.ph/entity-api-cpu/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200131 13:20:55.148" endtime="20200131 13:20:55.148"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Authorization=${valid_token}</arg>
 </arguments>
 <assign>
-<var>${ContentTypeValue}</var>
+<var>${headers}</var>
 </assign>
-<msg timestamp="20200125 17:58:08.863" level="INFO">${ContentTypeValue} = application/json</msg>
-<status status="PASS" starttime="20200125 17:58:08.863" endtime="20200125 17:58:08.863"></status>
+<msg timestamp="20200131 13:20:55.148" level="INFO">${headers} = {'Authorization': 'eyJraWQiOiI2UHlBQkZGU1ZhZkoxVmVCXC9qazhcL09VOTNBcjRtaFhQZHhGOFwvUVMxWHBZPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI1Mzk0N2FmYi1lNWUzLTQ0NjEtODFkYy00YzM2Njg5YjVhNWYiLCJldmVudF9pZCI6ImEwMGVlO...</msg>
+<status status="PASS" starttime="20200131 13:20:55.148" endtime="20200131 13:20:55.148"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>MySession</arg>
+<arg>${route}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20200131 13:20:55.148" level="INFO">GET Request using : uri=/entities, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'eyJraWQiOiI2UHlBQkZGU1ZhZkoxVmVCXC9qazhcL09VOTNBcjRtaFhQZHhGOFwvUVMxWHBZPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI1Mzk0N2FmYi1lNWUzLTQ0NjEtODFkYy00YzM2Njg5YjVhNWYiLCJldmVudF9pZCI6ImEwMGVlODU3LTYwNzYtNDZjMi04YWRjLWFhNGFjMDQ3NDAyMyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE1ODA0NDc4MDMsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV9tNEp4VlJOZ1oiLCJleHAiOjE1ODA0NTE0MDUsImlhdCI6MTU4MDQ0NzgwNSwianRpIjoiZjBiZGNkNDQtOGMxMC00ZDg4LWJiNDUtMGFlYjMwMTg4ODY5IiwiY2xpZW50X2lkIjoiNTZmdGQwMms1N2pic2piZXVoczY2ZnM2M2wiLCJ1c2VybmFtZSI6ImphaXJ1c0B1YngucGgifQ.l9f_cBC3YfeSIAZcb8x2slZG21wBmzBq8G5RU-7-irCmxDmOit96GUYBDAM-OBaDEdgdw1_1lrXNQJhzXFZ3cahuXGkdPW8R3lisi47sONOOWzq_A1fP7O6CZScRrs3oHNO5HV3QbVC9lAkvKav4utuKaiQ_cQBpFs6ced8vf_o5GiThgB3e8vS-lmiRgP2ggHpR0UNh5IqLjn5WY6OEBaAIS3yeP_1JJUEUDk7qoZegMu1emGJHEX_3iAdPROx2sHvhettaaxnbMzNwMLZI1Ozd_k6soumApm9-2KzLQ-_vGla7axxBVGFr81ZGkxayI8SCe1sq18P5YN5mkdS9hQ'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200131 13:20:55.773" level="INFO">c:\users\janielle gregorio\pycharmprojects\api_automation\venv\lib\site-packages\urllib3\connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'identity-api.ubx.ph'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200131 13:20:55.773" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200131 13:20:55.148" endtime="20200131 13:20:55.773"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<msg timestamp="20200131 13:20:55.773" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200131 13:20:55.773" endtime="20200131 13:20:55.773"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response.json()}</arg>
+</arguments>
+<status status="PASS" starttime="20200131 13:20:55.773" endtime="20200131 13:20:55.773"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.json()}</arg>
+</arguments>
+<assign>
+<var>${body}</var>
+</assign>
+<msg timestamp="20200131 13:20:55.773" level="INFO">${body} = {'timestamp': '2020-01-31T05:20:55.492Z', 'status': 200, 'message': 'Successfully retrieved entity list', 'entityList': [{'id': 'dbf21e0f-cfc6-4a29-9f4f-689940a06783', 'name': 'CPU', 'identityAddress'...</msg>
+<status status="PASS" starttime="20200131 13:20:55.773" endtime="20200131 13:20:55.773"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${body}</arg>
+<arg>CPU</arg>
+</arguments>
+<status status="PASS" starttime="20200131 13:20:55.773" endtime="20200131 13:20:55.773"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${body}</arg>
+<arg>VALID</arg>
+</arguments>
+<status status="PASS" starttime="20200131 13:20:55.773" endtime="20200131 13:20:55.773"></status>
+</kw>
+<status status="PASS" starttime="20200131 13:20:55.148" endtime="20200131 13:20:55.773" critical="yes"></status>
+</test>
+<test id="s1-t3" name="Get Entities With Invalid Token In Headers">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>MySession</arg>
+<arg>${base_url}</arg>
+</arguments>
+<msg timestamp="20200131 13:20:55.851" level="INFO">Creating Session using : alias=MySession, url=https://identity-api.ubx.ph/entity-api-cpu/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200131 13:20:55.851" endtime="20200131 13:20:55.851"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Authorization=${expired_token}}</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20200131 13:20:55.851" level="INFO">${headers} = {'Authorization': 'eyJraWQiOiI2UHlBQkZGU1ZhZkoxVmVCXC9qazhcL09VOTNBcjRtaFhQZHhGOFwvUVMxWHBZPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI1Mzk0N2FmYi1lNWUzLTQ0NjEtODFkYy00YzM2Njg5YjVhNWYiLCJldmVudF9pZCI6ImU4YWQ2M...</msg>
+<status status="PASS" starttime="20200131 13:20:55.851" endtime="20200131 13:20:55.851"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>MySession</arg>
+<arg>${route}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20200131 13:20:55.851" level="INFO">GET Request using : uri=/entities, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'eyJraWQiOiI2UHlBQkZGU1ZhZkoxVmVCXC9qazhcL09VOTNBcjRtaFhQZHhGOFwvUVMxWHBZPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI1Mzk0N2FmYi1lNWUzLTQ0NjEtODFkYy00YzM2Njg5YjVhNWYiLCJldmVudF9pZCI6ImU4YWQ2MzFmLTNhMTctNGRjMS04MjlkLTY3NTUzZmViNTc2MyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE1ODAzODI1NjEsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV9tNEp4VlJOZ1oiLCJleHAiOjE1ODAzODYxNjEsImlhdCI6MTU4MDM4MjU2MSwianRpIjoiM2UyOGU0YzctYTY4Zi00YjUzLThiOWItOWM2YTU3OTlmMTliIiwiY2xpZW50X2lkIjoiNTZmdGQwMms1N2pic2piZXVoczY2ZnM2M2wiLCJ1c2VybmFtZSI6ImphaXJ1c0B1YngucGgifQ.yMiXGD1A9ivAWIz2S0IWWgC_SRjQphX1Rp6dQDXChXEUee2PcRAOR44mLSBzt4UNtFrk6JENpf6X22jc_ML_OYshqaLMdynUjE82cc896ERT_9F1_hHnCJp6spa8ELV_BvAPTaxd2_A30YPLQLH8jWrBoM7kK1-uq9bgI-NP_rf7Z5AInX21xKaa1TWqCruUE2cybIzis}'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200131 13:20:56.304" level="INFO">c:\users\janielle gregorio\pycharmprojects\api_automation\venv\lib\site-packages\urllib3\connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'identity-api.ubx.ph'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200131 13:20:56.663" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<status status="PASS" starttime="20200131 13:20:55.851" endtime="20200131 13:20:56.663"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<msg timestamp="20200131 13:20:56.663" level="INFO">&lt;Response [401]&gt;</msg>
+<status status="PASS" starttime="20200131 13:20:56.663" endtime="20200131 13:20:56.663"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<status status="PASS" starttime="20200131 13:20:56.725" endtime="20200131 13:20:56.725"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${status_code}</var>
+</assign>
+<msg timestamp="20200131 13:20:56.725" level="INFO">${status_code} = 401</msg>
+<status status="PASS" starttime="20200131 13:20:56.725" endtime="20200131 13:20:56.725"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.json()}</arg>
+</arguments>
+<assign>
+<var>${body}</var>
+</assign>
+<msg timestamp="20200131 13:20:56.741" level="INFO">${body} = {'timestamp': '2020-01-31T05:20:56.091Z', 'status': 401, 'code': 9996, 'message': 'Invalid token'}</msg>
+<status status="PASS" starttime="20200131 13:20:56.741" endtime="20200131 13:20:56.741"></status>
 </kw>
 <kw name="Should Be Equal" library="BuiltIn">
 <doc>Fails if the given objects are unequal.</doc>
 <arguments>
-<arg>${ContentTypeValue}</arg>
-<arg>application/json</arg>
+<arg>${status_code}</arg>
+<arg>401</arg>
 </arguments>
-<status status="PASS" starttime="20200125 17:58:08.864" endtime="20200125 17:58:08.865"></status>
+<status status="PASS" starttime="20200131 13:20:56.741" endtime="20200131 13:20:56.741"></status>
 </kw>
-<status status="PASS" starttime="20200125 17:58:07.212" endtime="20200125 17:58:08.865" critical="yes"></status>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${body}</arg>
+<arg>Invalid token</arg>
+</arguments>
+<status status="PASS" starttime="20200131 13:20:56.741" endtime="20200131 13:20:56.741"></status>
+</kw>
+<status status="PASS" starttime="20200131 13:20:55.851" endtime="20200131 13:20:56.741" critical="yes"></status>
 </test>
-<status status="PASS" starttime="20200125 17:58:06.140" endtime="20200125 17:58:08.964"></status>
+<test id="s1-t4" name="Get Entities With Expired Token In Headers">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>MySession</arg>
+<arg>${base_url}</arg>
+</arguments>
+<msg timestamp="20200131 13:20:56.741" level="INFO">Creating Session using : alias=MySession, url=https://identity-api.ubx.ph/entity-api-cpu/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200131 13:20:56.741" endtime="20200131 13:20:56.741"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Authorization=${expired_token}</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20200131 13:20:56.741" level="INFO">${headers} = {'Authorization': 'eyJraWQiOiI2UHlBQkZGU1ZhZkoxVmVCXC9qazhcL09VOTNBcjRtaFhQZHhGOFwvUVMxWHBZPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI1Mzk0N2FmYi1lNWUzLTQ0NjEtODFkYy00YzM2Njg5YjVhNWYiLCJldmVudF9pZCI6ImU4YWQ2M...</msg>
+<status status="PASS" starttime="20200131 13:20:56.741" endtime="20200131 13:20:56.741"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>MySession</arg>
+<arg>${route}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20200131 13:20:56.741" level="INFO">GET Request using : uri=/entities, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'eyJraWQiOiI2UHlBQkZGU1ZhZkoxVmVCXC9qazhcL09VOTNBcjRtaFhQZHhGOFwvUVMxWHBZPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI1Mzk0N2FmYi1lNWUzLTQ0NjEtODFkYy00YzM2Njg5YjVhNWYiLCJldmVudF9pZCI6ImU4YWQ2MzFmLTNhMTctNGRjMS04MjlkLTY3NTUzZmViNTc2MyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE1ODAzODI1NjEsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV9tNEp4VlJOZ1oiLCJleHAiOjE1ODAzODYxNjEsImlhdCI6MTU4MDM4MjU2MSwianRpIjoiM2UyOGU0YzctYTY4Zi00YjUzLThiOWItOWM2YTU3OTlmMTliIiwiY2xpZW50X2lkIjoiNTZmdGQwMms1N2pic2piZXVoczY2ZnM2M2wiLCJ1c2VybmFtZSI6ImphaXJ1c0B1YngucGgifQ.yMiXGD1A9ivAWIz2S0IWWgC_SRjQphX1Rp6dQDXChXEUee2PcRAOR44mLSBzt4UNtFrk6JENpf6X22jc_ML_OYshqaLMdynUjE82cc896ERT_9F1_hHnCJp6spa8ELV_BvAPTaxd2_A30YPLQLH8jWrBoM7kK1-uq9bgI-NP_rf7Z5AInX21xKaa1TWqCruUE2cybIzis'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200131 13:20:56.997" level="INFO">c:\users\janielle gregorio\pycharmprojects\api_automation\venv\lib\site-packages\urllib3\connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'identity-api.ubx.ph'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200131 13:20:56.997" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<status status="PASS" starttime="20200131 13:20:56.741" endtime="20200131 13:20:56.997"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<msg timestamp="20200131 13:20:56.997" level="INFO">&lt;Response [401]&gt;</msg>
+<status status="PASS" starttime="20200131 13:20:56.997" endtime="20200131 13:20:56.997"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<status status="PASS" starttime="20200131 13:20:56.997" endtime="20200131 13:20:56.997"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${status_code}</var>
+</assign>
+<msg timestamp="20200131 13:20:57.012" level="INFO">${status_code} = 401</msg>
+<status status="PASS" starttime="20200131 13:20:57.012" endtime="20200131 13:20:57.012"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.json()}</arg>
+</arguments>
+<assign>
+<var>${body}</var>
+</assign>
+<msg timestamp="20200131 13:20:57.012" level="INFO">${body} = {'timestamp': '2020-01-31T05:20:56.780Z', 'status': 401, 'code': 9996, 'message': 'Token has expired'}</msg>
+<status status="PASS" starttime="20200131 13:20:57.012" endtime="20200131 13:20:57.012"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status_code}</arg>
+<arg>401</arg>
+</arguments>
+<status status="PASS" starttime="20200131 13:20:57.012" endtime="20200131 13:20:57.012"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${body}</arg>
+<arg>Token has expired</arg>
+</arguments>
+<status status="PASS" starttime="20200131 13:20:57.012" endtime="20200131 13:20:57.012"></status>
+</kw>
+<status status="PASS" starttime="20200131 13:20:56.741" endtime="20200131 13:20:57.012" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20200131 13:20:53.594" endtime="20200131 13:20:57.012"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0">Critical Tests</stat>
-<stat pass="1" fail="0">All Tests</stat>
+<stat pass="4" fail="0">Critical Tests</stat>
+<stat pass="4" fail="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" id="s1" name="TC1 GET Request">TC1 GET Request</stat>
+<stat pass="4" fail="0" id="s1" name="TC2 AKIN">TC2 AKIN</stat>
 </suite>
 </statistics>
 <errors>
